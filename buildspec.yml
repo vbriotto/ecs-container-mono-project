@@ -16,16 +16,7 @@ phases:
       - chmod 400 /home/ubuntu/.ssh/fiap-lab.pem
   build:
     commands:
-      - stackName="PilhaMedDonateMonolito"
-      - aws cloudformation --region us-east-1 describe-stacks --stack-name $stackName
-      - publicIp=$(aws cloudformation --region us-east-1 describe-stacks --stack-name $stackName --query "Stacks[0].Outputs[?OutputKey=='PublicIP'].OutputValue" --output text)
-      - echo $publicIp
-      - sed -i -e "s/PUBLIC_IP/$publicIp/g" hosts
-      - cat hosts
-      - export ANSIBLE_HOST_KEY_CHECKING=False
-      - ansible all -m ping  -i hosts -u ubuntu
-      - ansible-playbook -i hosts play.yaml 
-      - echo "teste" >> elb.txt
+      - bash deploy.sh us-east-1 ecs-monolito
   post_build:
     commands:
       - echo "DONE!!!!"
