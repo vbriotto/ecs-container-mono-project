@@ -16,7 +16,7 @@ phases:
       - chmod 400 /home/ubuntu/.ssh/fiap-lab.pem
   build:
     commands:
-      - bash deploy.sh us-east-1 ecs-monolito
+      - bash deploy.sh us-east-1 PilhaMedDonateMonolito
   post_build:
     commands:
       - echo "DONE!!!!"
